@@ -9,20 +9,20 @@ Author URI: http://swapnilpatil.in
 
 */
 
-
 add_action('in_widget_form', 'shortcodely_spice_get_widget_id');
 function shortcodely_spice_get_widget_id($widget_instance)
 {
-    echo "<p><strong>To use as shortcode with id:</strong> ";
-    if ($widget_instance->number=="__i__") {
-        echo "Save the widget first!</p>"   ;
+    echo '<p><strong>To use as shortcode with id:</strong> ';
+    if ($widget_instance->number == '__i__') {
+        echo 'Save the widget first!</p>';
     } else {
-        echo "[do_widget id=".$widget_instance->id. "]</p>";
+        echo '[do_widget id='.$widget_instance->id.']</p>';
     }
 }
 
 function shortcodely_remove_widget_class($params)
-{  // remove the widget classes
+{
+    // remove the widget classes
     if (!empty($params[0]['before_widget'])) {
         $params[0]['before_widget'] =
             str_replace('"widget ', '"', $params[0]['before_widget']);
@@ -33,20 +33,24 @@ function shortcodely_remove_widget_class($params)
             $params[0]['before_title'] = str_replace('widget-title', '', $params[0]['before_title']);
     }
 
-    return ($params);
+    return $params;
 }
 /*-----------------------------------*/
 function shortcodely_do_widget_area($atts)
 {
     global $wp_registered_widgets, $_wp_sidebars_widgets, $wp_registered_sidebars;
 
-    extract(shortcode_atts(array(
-        'widget_area' => 'widgets_for_shortcodes',
-        'class' => 'shortcodely-widget-area', /* the widget class is picked up automatically.  If we want to add an additional class at the wrap level to try to match a theme, use this */
-        'widget_area_class' =>  '',  /* option to disassociate from themes widget styling use =none*/
-        'widget_classes' =>  ''  /* option to disassociate from themes widget styling */
+    extract(
+        shortcode_atts(
+            array(
+            'widget_area' => 'widgets_for_shortcodes',
+            'class' => 'shortcodely-widget-area', /* the widget class is picked up automatically.  If we want to add an additional class at the wrap level to try to match a theme, use this */
+            'widget_area_class' => '',  /* option to disassociate from themes widget styling use =none*/
+            'widget_classes' => '',  /* option to disassociate from themes widget styling */
 
-    ), $atts));
+            ), $atts
+        )
+    );
 
     if (!empty($atts)) {
         if (($widget_area == 'widgets_for_shortcodes') and !empty($atts[0])) {
@@ -56,13 +60,13 @@ function shortcodely_do_widget_area($atts)
 
     if (empty($wp_registered_sidebars[$widget_area])) {
         echo '<br/>Widget area "'.$widget_area.'" not found. Registered widget areas (sidebars) are: <br/>';
-        foreach ($wp_registered_sidebars as $area=> $sidebar) {
+        foreach ($wp_registered_sidebars as $area => $sidebar) {
             echo $area.'<br />';
         }
     }
     //if (isset($_REQUEST['do_widget_debug']) and current_user_can('administrator')) var_dump( $wp_registered_sidebars); /**/
 
-    if ($widget_area_class=='none') {
+    if ($widget_area_class == 'none') {
         $class = '';
     } else {
         if (!empty($widget_area_class)) {  //2014 08
@@ -72,7 +76,7 @@ function shortcodely_do_widget_area($atts)
         }
     }
 
-    if (!empty($widget_classes) and ($widget_classes=='none')) {
+    if (!empty($widget_classes) and ($widget_classes == 'none')) {
         add_filter('dynamic_sidebar_params', 'shortcodely_remove_widget_class');
     }
 
@@ -81,39 +85,44 @@ function shortcodely_do_widget_area($atts)
     $output = ob_get_clean();
     remove_filter('dynamic_sidebar_params', 'shortcodely_remove_widget_class');
 
-    $output = PHP_EOL.'<div id="'.$widget_area.'" '.$class. '>'
+    $output = PHP_EOL.'<div id="'.$widget_area.'" '.$class.'>'
         .$output
         .'</div>'.PHP_EOL;
 
-    return ($output);
+    return $output;
 }
 /*-----------------------------------*/
 function shortcodely_do_widget($atts)
 {
     global $wp_registered_widgets, $_wp_sidebars_widgets, $wp_registered_sidebars;
 
-/* check if the widget is in  the shortcode x sidebar  if not , just use generic,
-if it is in, then get the instance  data and use that */
+    /* check if the widget is in  the shortcode x sidebar  if not , just use generic,
+    if it is in, then get the instance  data and use that */
 
     if (is_admin()) {
         return '';
     }  // eg in case someone decides to apply content filters when apost is saved, and not all widget stuff is there.
 
-    extract(shortcode_atts(array(
-        'sidebar' => 'Widgets for Shortcodes', //default
-        'id' => '',
-        'name' => '',
-        'title' => '',   /* do the default title unless they ask us not to - use string here not boolean */
-        'class' => 'shortcodely_widget', /* the widget class is picked up automatically.  If we want to add an additional class at the wrap level to try to match a theme, use this */
-        'wrap' => '', /* wrap the whole thing - title plus widget in a div - maybe the themes use a div, maybe not, maybe we want that styling, maybe not */
-        'widget_classes' =>  ''  /* option to disassociate from themes widget styling */
-    ), $atts));
+    extract(
+        shortcode_atts(
+            array(
+            'sidebar' => 'Widgets for Shortcodes', //default
+            'id' => '',
+            'name' => '',
+            'title' => '',   /* do the default title unless they ask us not to - use string here not boolean */
+            'class' => 'shortcodely_widget', /* the widget class is picked up automatically.  If we want to add an additional class at the wrap level to try to match a theme, use this */
+            'wrap' => '', /* wrap the whole thing - title plus widget in a div - maybe the themes use a div, maybe not, maybe we want that styling, maybe not */
+            'widget_classes' => '',  /* option to disassociate from themes widget styling */
+            ), $atts
+        )
+    );
 
     if (isset($_wp_sidebars_widgets)) {
         shortcodely_show_widget_debug('which one', $name, $id, $sidebar);  //check for debug prompt and show widgets in shortcode sidebar if requested and logged in etc
     } else {
         $output = '<br />No widgets defined at all in any sidebar!';
-        return ($output);
+
+        return $output;
     }
 
     /* compatibility check - if the name is not entered, then the first parameter is the name */
@@ -133,26 +142,27 @@ if it is in, then get the instance  data and use that */
         }
 
         if (!($sidebarid = shortcodely_get_sidebar_id($sidebar))) {
-            $sidebarid=$sidebar;   /* get the official sidebar id for this widget area - will take the first one */
+            $sidebarid = $sidebar;   /* get the official sidebar id for this widget area - will take the first one */
         }
     } else { /* check for id if we do not have a name */
 
-            if (!empty($id)) {    /* if a specific id has been specified */
-                foreach ($wp_registered_widgets as $i => $w) { /* get the official internal name or id that the widget was registered with  */
-                    if ($w['id'] === $id) {
-                        $widget_ids[] = $id;
-                    }
+        if (!empty($id)) {    /* if a specific id has been specified */
+            foreach ($wp_registered_widgets as $i => $w) { /* get the official internal name or id that the widget was registered with  */
+                if ($w['id'] === $id) {
+                    $widget_ids[] = $id;
                 }
-                //echo '<h2>We have an id: '.$id.'</h2>'; 	if (!empty($widget_ids)) var_dump($widget_ids);
-            } else {
-                $output = '<br />No valid widget name or id given in shortcode parameters';
-
-                return $output;
             }
+            //echo '<h2>We have an id: '.$id.'</h2>'; 	if (!empty($widget_ids)) var_dump($widget_ids);
+        } else {
+            $output = '<br />No valid widget name or id given in shortcode parameters';
+
+            return $output;
+        }
             // if we have id, get the sidebar for it
             $sidebarid = shortcodely_get_widgets_sidebar($id);
         if (!$sidebarid) {
-            $output =  '<br />Widget not in any sidebars<br />';
+            $output = '<br />Widget not in any sidebars<br />';
+
             return $output;
         }
     }
@@ -165,11 +175,11 @@ if it is in, then get the instance  data and use that */
     }
 
     if (empty($widget_ids)) {
-        $output =  '<br />Error: Your Requested widget "'.$widget.' '.$id.'" is not in the widget list.<br />';
+        $output = '<br />Error: Your Requested widget "'.$widget.' '.$id.'" is not in the widget list.<br />';
         $output .= shortcodely_show_widget_debug('empty', $name, $id, $sidebar);
-        return ($output) ;
-    }
 
+        return $output;
+    }
 
     if (empty($widget)) {
         $widget = '';
@@ -188,15 +198,15 @@ if it is in, then get the instance  data and use that */
 
         $wid = array_intersect($_wp_sidebars_widgets[$sidebarid], $widget_ids);
     } else { /* the sidebar is not defined or selected - should not happen */
-            if (isset($debug)) {  // only do this in debug mode
-                if (!isset($_wp_sidebars_widgets[$sidebarid])) {
-                    $output =  '<p>Error: Sidebar "'.$sidebar.'" with sidebarid "'.$sidebarid.'" is not defined.</p>';
-                }
-                 // shouldnt happen - maybe someone running content filters on save
-                else {
-                    $output =  '<p>Error: Sidebar "'.$sidebar.'" with sidebarid "'.$sidebarid.'" is empty (no widgets)</p>';
-                }
+        if (isset($debug)) {  // only do this in debug mode
+            if (!isset($_wp_sidebars_widgets[$sidebarid])) {
+                $output = '<p>Error: Sidebar "'.$sidebar.'" with sidebarid "'.$sidebarid.'" is not defined.</p>';
             }
+            // shouldnt happen - maybe someone running content filters on save
+            else {
+                $output = '<p>Error: Sidebar "'.$sidebar.'" with sidebarid "'.$sidebarid.'" is empty (no widgets)</p>';
+            }
+        }
     }
 
     $output = '';
@@ -209,23 +219,24 @@ if it is in, then get the instance  data and use that */
     } else {
         /*  There may only be one but if we have two in our chosen widget then it will do both */
         $output = '';
-        foreach ($wid as $i=>$widget_instance) {
+        foreach ($wid as $i => $widget_instance) {
             ob_start();  /* catch the echo output, so we can control where it appears in the text  */
             shortcodely_shortcode_sidebar($widget_instance, $sidebar, $title, $class, $wrap, $widget_classes);
             $output .= ob_get_clean();
         }
     }
 
-    return ($output);
+    return $output;
 }
 /* -------------------------------------------------------------------------*/
 function shortcodely_shortcode_sidebar($widget_id,
-    $name="widgets_for_shortcode",
-    $title=true,
-    $class='',
-    $wrap='',
-    $widget_classes='')
-{ /* This is basically the wordpress code, slightly modified  */
+    $name = 'widgets_for_shortcode',
+    $title = true,
+    $class = '',
+    $wrap = '',
+    $widget_classes = ''
+) {
+    /* This is basically the wordpress code, slightly modified  */
     global $wp_registered_sidebars, $wp_registered_widgets;
 
     $debug = shortcodely_check_if_widget_debug();
@@ -240,25 +251,27 @@ function shortcodely_shortcode_sidebar($widget_id,
 
     /* lifted from wordpress code, keep as similar as possible for now */
 
-        if (!isset($wp_registered_widgets[$widget_id])) {
-            return;
-        } // wp had c o n t i n u e
+    if (!isset($wp_registered_widgets[$widget_id])) {
+        return;
+    } // wp had c o n t i n u e
 
         $params = array_merge(
             array(
-                array_merge($sidebar,
+                array_merge(
+                    $sidebar,
                     array('widget_id' => $widget_id,
-                        'widget_name' => $wp_registered_widgets[$widget_id]['name'])) ),
-                        (array) $wp_registered_widgets[$widget_id]['params']
+                    'widget_name' => $wp_registered_widgets[$widget_id]['name'], )
+                ), ),
+            (array) $wp_registered_widgets[$widget_id]['params']
         );
 
     $validtitletags = array('h1', 'h2', 'h3', 'h4', 'h5', 'header', 'strong', 'em');
     $validwraptags = array('div', 'p', 'main', 'aside', 'section');
 
     if (!empty($wrap)) { /* then folks want to 'wrap' with their own html tag, or wrap = yes  */
-            if ((!in_array($wrap, $validwraptags))) {
-                $wrap = '';
-            }
+        if ((!in_array($wrap, $validwraptags))) {
+            $wrap = '';
+        }
               /* To match a variety of themes, allow for a variety of html tags. */
               /* May not need if our sidebar match attempt has worked */
     }
@@ -273,9 +286,9 @@ function shortcodely_shortcode_sidebar($widget_id,
         //foreach ( (array) $wp_registered_widgets[$widget_id]['classname'] as $cn ) {
             $cn = $wp_registered_widgets[$widget_id]['classname'];
     if (is_string($cn)) {
-        $classname_ .= '_' . $cn;
+        $classname_ .= '_'.$cn;
     } elseif (is_object($cn)) {
-        $classname_ .= '_' . get_class($cn);
+        $classname_ .= '_'.get_class($cn);
     }
         //}
         $classname_ = ltrim($classname_, '_');
@@ -285,18 +298,16 @@ function shortcodely_shortcode_sidebar($widget_id,
 
         // $classname_ .= ' widget '; // wordpress seems to almost always adds the widget class
 
-
         $classname_ .= ' '.$class;
 
         // we are picking up the defaults from the  thems sidebar ad they have registered heir sidebar to issue widget classes?
 
-
         // Substitute HTML id and class attributes into before_widget
-        if (!empty($params[0]['before_widget'])) {
-            $params[0]['before_widget'] = sprintf($params[0]['before_widget'], $widget_id, $classname_);
-        } else {
-            $params[0]['before_widget'] = '';
-        }
+    if (!empty($params[0]['before_widget'])) {
+        $params[0]['before_widget'] = sprintf($params[0]['before_widget'], $widget_id, $classname_);
+    } else {
+        $params[0]['before_widget'] = '';
+    }
 
     if (empty($params[0]['before_widget'])) {
         $params[0]['after_widget'] = '';
@@ -305,67 +316,65 @@ function shortcodely_shortcode_sidebar($widget_id,
     $params = apply_filters('dynamic_sidebar_params', $params);
         // allow, any pne usingmust ensure they apply to the correct sidebars
 
-        if (!empty($title)) {
-            if ($title=='false') { /* shortcodely switch off the title html, still need to get rid of title separately */
-                $params[0]['before_title'] = '<span style="display: none">';
-                $params[0]['after_title'] = '</span>';
-            } else {
-                if (in_array($title, $validtitletags)) {
-                    $class = ' class="widget-title" ';
+    if (!empty($title)) {
+        if ($title == 'false') { /* shortcodely switch off the title html, still need to get rid of title separately */
+            $params[0]['before_title'] = '<span style="display: none">';
+            $params[0]['after_title'] = '</span>';
+        } else {
+            if (in_array($title, $validtitletags)) {
+                $class = ' class="widget-title" ';
 
-                    $params[0]['before_title'] = '<'.$title.' '.$class.' >';
-                    $params[0]['after_title'] = '</'.$title.'>';
-                }
+                $params[0]['before_title'] = '<'.$title.' '.$class.' >';
+                $params[0]['after_title'] = '</'.$title.'>';
             }
         }
+    }
 
     if (!empty($widget_classes) and ($widget_classes == 'none')) {
         $params = shortcodely_remove_widget_class($params);  // also called in widget area shortcode
     }
-
 
     $callback = $wp_registered_widgets[$widget_id]['callback'];
     if (is_callable($callback)) {
         call_user_func_array($callback, $params);
         $did_one = true;
     }
-//	}
+    //	}
     return $did_one;
 }
 /* ---------------------------------------------------------------------------*/
 function shortcodely_reg_sidebar()
-{  // this is fired late, so hopefully any theme sidebars will have been registered already.
+{
+    // this is fired late, so hopefully any theme sidebars will have been registered already.
 
-global $wp_registered_widgets, $_wp_sidebars_widgets, $wp_registered_sidebars;
+    global $wp_registered_widgets, $_wp_sidebars_widgets, $wp_registered_sidebars;
 
     if (function_exists('register_sidebar')) {  // maybe later, get the first main sidebar and copy it's before/after etc
-    $args = array(
-        'name'            =>'Widgets for Shortcodes',
-        'id'            => 'widgets_for_shortcodes',  // hope to avoid losing widgets
-        'description'   => __('Sidebar to hold widgets and their settings. These widgets will be used in a shortcode.  This sidebars widgets should be saved with your theme settings now.', 'shortcodely-shortcode-any-widget'),
+        $args = array(
+        'name' => 'Widgets for Shortcodes',
+        'id' => 'widgets_for_shortcodes',  // hope to avoid losing widgets
+        'description' => __('Sidebar to hold widgets and their settings. These widgets will be used in a shortcode.  This sidebars widgets should be saved with your theme settings now.', 'shortcodely-shortcode-any-widget'),
         'before_widget' => '<aside'.' id="%1$s" class="%2$s ">',  // 201402 to match twentyfourteen theme
-        'after_widget'  => '</aside>',
-        'before_title'  => '<h1 class="widget-title" >', // 201402 maybe dont use widget class - we are in content here not in a widget area but others want the widget styling. ?
-        'after_title'   => '</h1>' );
-
-
+        'after_widget' => '</aside>',
+        'before_title' => '<h1 class="widget-title" >', // 201402 maybe dont use widget class - we are in content here not in a widget area but others want the widget styling. ?
+        'after_title' => '</h1>', );
 
         if (!empty($wp_registered_sidebars)) {  // we got some sidebars already.
-        $main_sidebar = reset($wp_registered_sidebars);  // Grab the first sidebar and use that as defaults for the widgets
-        $args['before_widget']    = $main_sidebar['before_widget'];
-            $args['after_widget']    = $main_sidebar['after_widget'];
-            $args['before_title']    = $main_sidebar['before_title'];
-            $args['after_title']    = $main_sidebar['after_title'];
+            $main_sidebar = reset($wp_registered_sidebars);  // Grab the first sidebar and use that as defaults for the widgets
+            $args['before_widget'] = $main_sidebar['before_widget'];
+            $args['after_widget'] = $main_sidebar['after_widget'];
+            $args['before_title'] = $main_sidebar['before_title'];
+            $args['after_title'] = $main_sidebar['after_title'];
         }
 
         register_sidebar($args);
     }
 
-//else {	echo '<h1>CANNOT REGISTER widgets_for_shortcodes SIDEBAR</h1>';}
+    //else {	echo '<h1>CANNOT REGISTER widgets_for_shortcodes SIDEBAR</h1>';}
 }
 /*-----------------------------------*/
-include('shortcodely-admin-form-html.php');
-include('shortcodely-utilities.php');
+require 'shortcodely-admin-form-html.php';
+require 'shortcodely-utilities.php';
 
 if (is_admin()) {
     $shortcodely_saw_plugin_admin = new shortcodely_saw_plugin_admin();
@@ -383,20 +392,22 @@ add_shortcode('do_widget_area', 'shortcodely_do_widget_area');  // just dump the
 function shortcodely_saw_load_text()
 {
     // wp (see l10n.php) will check wp-content/languages/plugins if nothing found in plugin dir
-    $result = load_plugin_textdomain('shortcodely-shortcode-any-widget', false,
-    dirname(plugin_basename(__FILE__)) . '/languages/');
+    $result = load_plugin_textdomain(
+        'shortcodely-shortcode-any-widget', false,
+        dirname(plugin_basename(__FILE__)).'/languages/'
+    );
 }
-
 
 add_action('plugins_loaded', 'shortcodely_saw_load_text');
 
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'shortcodely_add_action_links');
+add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'shortcodely_add_action_links');
 
 function shortcodely_add_action_links($links)
 {
     $mylinks[] =
- '<a title="Haven\'t read the instructions? Need your hand held?" href="' . admin_url('options-general.php?page=shortcodely_saw') . '">Settings</a>';
+    '<a title="Haven\'t read the instructions? Need your hand held?" href="'.admin_url('options-general.php?page=shortcodely_saw').'">Settings</a>';
     $mylinks[] =
- '<a title="Yes I know it is the same link, but some people ...." href="' . admin_url('options-general.php?page=shortcodely_saw') . '">HELP</a>';
+    '<a title="Yes I know it is the same link, but some people ...." href="'.admin_url('options-general.php?page=shortcodely_saw').'">HELP</a>';
+
     return array_merge($links, $mylinks);
 }
