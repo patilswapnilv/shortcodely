@@ -71,11 +71,6 @@ if ( ! class_exists( 'Shortcodely_Saw_Plugin_Admin' ) ) {
 			<div id="icon-options-general" class="icon32"><br />
 			</div>
 			<h2>' . $title . ' </h2>';
-				//		<form method="post" action="'
-				//		.esc_url($_SERVER['PHP_SELF'])
-				//		.'">';
-				//		wp_nonce_field($this->hook); /* outputs hidden field */
-				//		;
 		}
 
 		public function admin_subheading( $title ) {
