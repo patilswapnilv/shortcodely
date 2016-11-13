@@ -181,7 +181,7 @@ function shortcodely_do_widget( $atts ) {
 		$widget = '';
 	}
 
-		$content = '';
+		//$content = '';
 		/* if the widget is in our chosen sidebar, then use the options stored for that */
 
 	if ( ( ! isset( $_wp_sidebars_widgets[ $sidebarid ] )) or (empty( $_wp_sidebars_widgets[ $sidebarid ] )) ) { // try upgrade
