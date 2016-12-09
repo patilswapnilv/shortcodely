@@ -1,24 +1,11 @@
-# Shortcodely
-Insert separate widgets or a entire widget area (sidebar) into a page using a shortcode.
+=== Shortcodely ===
+Contributors: patilswapnilv
+Tags: shortcode, widget, page, templates, page template, widget_area, sidebar
+Tested up to: 4.7
+Version: 1.0.0
+Stable tag: 1.0.0
 
-**Contributors:** patilswapnilv <https://github.com/patilswapnilv>      
-**Plugin Name:** Shortcodely           
-**Plugin URI:** https://github.com/patilswapnilv/shortcodely/     
-**Tags:** shortcode, widget, page, templates, page template, widget_area, sidebar            
-**Author:** patilswapnilv           
-**Author URI:** http://swapnilpatil.in/         
-**Donate link:** http://swapnilpatil.in/contribution/       
-**Licence:** GPL-3.0+            
-**Licence URI:** https://www.gnu.org/licenses/gpl-3.0.en.html        
-**Requires at least:** 4.0       
-**Tested up to:** 4.7         
-**Version:** 1.0.0            
-**Stable tag:** 1.0.0            
-
-[![Build Status](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/badges/build.png?b=master)](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/build-status/master)
- [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/?branch=master) [![Code Climate](https://codeclimate.com/github/patilswapnilv/shortcodely/badges/gpa.svg)](https://codeclimate.com/github/patilswapnilv/shortcodely)
-
-##Synopsis
+== Description ==
 Insert separate widgets or a entire widget area (sidebar) into a page using a shortcode.
 
 Customize the widget setting in "widgets for shortcodely" widget area.No extra efforts. Exactly as you would do it for any other widget.
@@ -29,7 +16,7 @@ The plugins default action is that it will magically find the settings for your 
 
 Whenever you need to change your theme, the plugin automagically saves and restores the widgets and its settings. It will then select the sidebar setting from the currect theme you are using.
 
-##Instructions:
+**Instructions:**
 
 1. Make sure you test the widget in the regualr widget area, or any exisitng sidebar.
 2. Then Activate shortcodely. (Ignore id already done.)
@@ -45,10 +32,11 @@ Whenever you need to change your theme, the plugin automagically saves and resto
  [do_widget_area]  (will use the  "widgets in shortcodes" widget area / sidebar
  [do_widget_area sidebarname]  for another sidebar or widget area - eg: to maximise likelihood of getting your theme's widget css to apply.
 
+
 7. If the plugin cannot work out what you want and you are logged in as an administrator, it will show a debug prompt to you, the logged in admin only.
 Click on the link 'Try debug'.  It will produce a bunch of info. Look for the id of your widget in the shortcodes sidebar (you may have to scroll through a lot of debug info). Try using the widget id.   Sometimes the widget name that wordpress calls it internally is not the same as what you see on the screen and you will need the 'debug' to find the id.
 
-##[do_widget ...] Parameters:
+**[do_widget ...] Parameters:**
 
 *  *nameofwidget* or name="*nameofwidget*"  This is NOT the title of the widget.  THis is the name that you see in the widgets menu page even when unassigned to a sidebar.  For existing users , you can also use just the name of the widget without name=.  It must bethe first parameter then.
 *  id=*wordpress assigned id of widget*
@@ -58,7 +46,7 @@ Click on the link 'Try debug'.  It will produce a bunch of info. Look for the id
 *  class=*yourclassname*  By default the plugin will add a class of amr-widget tto the wrapping html.  You can use this to add any special css.  Add css either by editing your themes stylesheet if it is a custom theme, or using something like the wordpress custom css plugin.
 *  sidebar="*sidebarname*"  will default to widgets_for_shortcode sidebar.  Only use if you want to re-use a widget already beingused in another sidebar.  THis is theme dependent and WILL break if you change themes.
 
-##[do_widget_area ...] Parameters:
+**[do_widget_area ...] Parameters:**
 
 *  widget_area=*yourwidgetarea*  defaults to 'widgets_for_shortcodes' if nothing entered
 *  widget_area_class=none    /* option to remove theme styling by removing the widget_area class from the sidebar html */
@@ -81,11 +69,13 @@ If you liked this plugin, you might also like my other plugins:
 
 [**Gravity Pre-submission Confirmation**](https://wordpress.org/plugins/gravity-pre-submission-confirmation/) - adds a pre-submission confirmation page to your Graviy forms where users can preview their entered data before they submit it.
 
-## Changelog
-= Version 1.0.0 =
-*  First stable release.
 
-## Installation
+
+== Changelog ==
+= Version 1.0.0 =
+*  First stabel release.
+
+== Installation ==
 
 0. Activate plugin
 1. Goto Appearance > Widgets and find "shortcode" sidebar
@@ -110,7 +100,7 @@ do_widget_area parameters:
 * widget_classes=none  (will take the 'widget' class out and the widget-title class out)
 * widget_area_class=none (will take out the 'widget_area' class )
 
-## Styling
+**Styling**
 
 Check your styling.  The effects are very dependent on how your theme has specified the css that may apply to widgets and sidebars/widget areas.  It may work beautifully and have the content looking like it belongs with your theme.
 You may have undesired effects applying that do not work in the main content area.
@@ -125,5 +115,4 @@ Via the plugin you can do the following to affect styling:
 
 
 
-## Screenshots
-*coming soon*
+== Screenshots ==
