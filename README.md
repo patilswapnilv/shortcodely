@@ -15,7 +15,8 @@ Insert separate widgets or a entire widget area (sidebar) into a page using a sh
 **Version:** 1.0.0            
 **Stable tag:** 1.0.0            
 
-[![Build Status](https://travis-ci.org/patilswapnilv/shortcodely.svg)](https://travis-ci.org/patilswapnilv/shortcodely) ![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/badges/quality-score.png?b=master) [![Code Climate](https://codeclimate.com/github/patilswapnilv/shortcodely/badges/gpa.svg)](https://codeclimate.com/github/patilswapnilv/shortcodely)
+[![Build Status](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/badges/build.png?b=master)](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/build-status/master)
+ ![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/patilswapnilv/shortcodely/badges/quality-score.png?b=master) [![Code Climate](https://codeclimate.com/github/patilswapnilv/shortcodely/badges/gpa.svg)](https://codeclimate.com/github/patilswapnilv/shortcodely)
 
 ##Synopsis
 Insert separate widgets or a entire widget area (sidebar) into a page using a shortcode.
