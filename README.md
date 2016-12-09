@@ -82,7 +82,7 @@ If you liked this plugin, you might also like my other plugins:
 
 ## Changelog
 = Version 1.0.0 =
-*  First stabel release.
+*  First stable release.
 
 ## Installation
 
