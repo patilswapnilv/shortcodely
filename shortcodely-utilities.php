@@ -5,7 +5,8 @@
  *
  * @package Shortcodely
  */
-function shortcodely_show_shortcode_widget_possibilities() {
+function shortcodely_show_shortcode_widget_possibilities() 
+{
     //function to show the widget possibilities
     global $_wp_sidebars_widgets;
 
@@ -29,7 +30,8 @@ function shortcodely_show_shortcode_widget_possibilities() {
 }
 
 /*-----------------------------------*/
-function shortcodely_get_widgets_sidebar($wid) {
+function shortcodely_get_widgets_sidebar($wid) 
+{
     /* walk through the registered sidebars with a name and find the id - will be something like sidebar-integer.
     take the first one that matches */
     global $_wp_sidebars_widgets;
@@ -47,7 +49,8 @@ function shortcodely_get_widgets_sidebar($wid) {
     return false; // widget id not in any sidebar
 }
 /*-----------------------------------*/
-function shortcodely_get_sidebar_id($name) {
+function shortcodely_get_sidebar_id($name) 
+{
     /* walk through the registered sidebars with a name and find the id - will be something like sidebar-integer.
     take the first one that matches */
     global $wp_registered_sidebars;
@@ -61,7 +64,8 @@ function shortcodely_get_sidebar_id($name) {
     return false;
 }
 /*-----------------------------------*/
-function shortcodely_get_sidebar_name($id) {
+function shortcodely_get_sidebar_name($id) 
+{
     /* dont need anymore ? or at least temporarily */
     /* walk through the registered sidebars with a name and find the id - will be something like sidebar-integer.  take the first one */
     global $wp_registered_sidebars;
@@ -78,7 +82,8 @@ function shortcodely_get_sidebar_name($id) {
     return false;
 }
 /*-----------------------------------*/
-function shortcodely_check_if_widget_debug() {
+function shortcodely_check_if_widget_debug() 
+{
     global $said;
     // only do these debug if we are logged in and are the administrator
 
@@ -114,7 +119,8 @@ function shortcodely_check_if_widget_debug() {
 /**
  * @param string $type
  */
-function shortcodely_show_widget_debug($type, $name, $id, $sidebar) {
+function shortcodely_show_widget_debug($type, $name, $id, $sidebar) 
+{
     global $wp_registered_sidebars, $wp_registered_widgets, $_wp_sidebars_widgets, $debugcount;
     // only do these debug if we are logged in and are the administrator
 
@@ -133,16 +139,18 @@ function shortcodely_show_widget_debug($type, $name, $id, $sidebar) {
     return $text;
 }
 /*-----------------------------------*/
-function shortcodely_save_shortcodes_sidebar() {
+function shortcodely_save_shortcodes_sidebar() 
+{
     // when switching a theme, save the widgets we use for the shortcodes as they are getting overwritten
     $sidebars_widgets = wp_get_sidebars_widgets();
-    if ( ! empty($sidebars_widgets['widgets_for_shortcodes'])) {
+    if (! empty($sidebars_widgets['widgets_for_shortcodes'])) {
         update_option('sidebars_widgets_for_shortcodes_saved', $sidebars_widgets['widgets_for_shortcodes']);
     } else {  // our shortcodes sidebar is empty  but when to fix ?
     }
 }
 /*-----------------------------------*/
-function shortcodely_restore_shortcodes_sidebar() {
+function shortcodely_restore_shortcodes_sidebar() 
+{
     // when switching a theme, restore the widgets we use for the shortcodes as they are getting overwritten
     global $_wp_sidebars_widgets;
 
@@ -153,10 +161,11 @@ function shortcodely_restore_shortcodes_sidebar() {
     }
 }
 /*-----------------------------------*/
-function shortcodely_upgrade_sidebar() {
+function shortcodely_upgrade_sidebar() 
+{
     // added in 2014 February for compatibility.. keep for how long. till no sites running older versions.?
     $sidebars_widgets = wp_get_sidebars_widgets();
-    if ( ! empty($sidebars_widgets['Shortcodes']) and empty($sidebars_widgets['widgets_for_shortcodes'])) {  // we need to upgrade
+    if (! empty($sidebars_widgets['Shortcodes']) and empty($sidebars_widgets['widgets_for_shortcodes'])) {  // we need to upgrade
         $sidebars_widgets['widgets_for_shortcodes'] = $sidebars_widgets['Shortcodes'];
         unset($sidebars_widgets['Shortcodes']);
         update_option('sidebars_widgets', $sidebars_widgets);
@@ -164,12 +173,13 @@ function shortcodely_upgrade_sidebar() {
     }
 }
 
-function widgets_shortcode_admin_notice() {
+function widgets_shortcode_admin_notice() 
+{
     ?>
-	<div class="updated">
-		<p>Please go to widgets page and check your "widgets for shortcodes" sidebar.  It will hopefully have been corrected upgraded with your widgets and all should be fine.</p>
-	</div>
-	<?php
+    <div class="updated">
+        <p>Please go to widgets page and check your "widgets for shortcodelys" sidebar.  It will hopefully have been corrected upgraded with your widgets and all should be fine.</p>
+    </div>
+    <?php
 
 }
 /*-----------------------------------*/

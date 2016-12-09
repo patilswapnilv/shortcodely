@@ -7,7 +7,7 @@
  */
 
 // ------------------------------------------------------------------------------------------------------------------
-if ( ! class_exists('Shortcodely_Saw_Plugin_Admin')) {
+if (! class_exists('Shortcodely_Saw_Plugin_Admin')) {
     /*
     * Shortcodely_Saw_Plugin_Admin Class Doc Comment
     *
@@ -18,7 +18,8 @@ if ( ! class_exists('Shortcodely_Saw_Plugin_Admin')) {
     * @ link		 http://www.github.com/patilswapnilv/shortcodely
     */
 
-    class Shortcodely_Saw_Plugin_Admin {
+    class Shortcodely_Saw_Plugin_Admin
+    {
 
 
         public $hook = 'shortcodely_saw';
@@ -35,27 +36,31 @@ if ( ! class_exists('Shortcodely_Saw_Plugin_Admin')) {
          * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
          * @link     http://www.github.com/patilswapnilv/shortcodely
          * /
-				 /**
+                 /**
          * This is a "Docblock Comment," also known as a "docblock."    The class'
          * docblock, below, contains a complete description of how to write these.
          */
         public $homepage = '';
         public $parent_slug = 'plugin_listings_menu';
         public $accesslvl = 'manage_options';
-        public function __construct() {
+        public function __construct() 
+        {
                 add_action('admin_menu', array(&$this, 'register_settings_page'));
                 add_filter('plugin_action_links', array(&$this, 'add_action_link'), 10, 2);
         }
-        public function register_settings_page() {
+        public function register_settings_page() 
+        {
                 add_options_page($this->longname, $this->shortname, $this->accesslvl, $this->hook, array(&$this, 'config_page'));
         }
-        public function plugin_options_url() {
+        public function plugin_options_url() 
+        {
                 return admin_url('options-general.php?page=' . $this->hook);
         }
         /**
          * Add a link to the settings page to the plugins list
          */
-        public function add_action_link($links, $file) {
+        public function add_action_link($links, $file) 
+        {
             static $this_plugin;
             if (empty($this_plugin)) {
                 $this_plugin = $this->filename;
@@ -70,17 +75,20 @@ if ( ! class_exists('Shortcodely_Saw_Plugin_Admin')) {
         /**
          * @param string $title
          */
-        public function admin_heading($title) {
+        public function admin_heading($title) 
+        {
                 echo '<div class="wrap" >
 			<div id="icon-options-general" class="icon32"><br />
 			</div>
 			<h2>' . $title . ' </h2>';
         }
 
-        public function admin_subheading($title) {
+        public function admin_subheading($title) 
+        {
                 echo '<h2>' . $title . '</h2>';
         }
-        public function config_page() {
+        public function config_page() 
+        {
                 $this->admin_heading($this->longname);
                 echo '<h3>More detailed instructions at the wordpress plugin <a target="_new" href="http://wordpress.org/plugins/shortcodely/installation">installation and faq pages.</a></h3>';
                 echo '<ol>';
@@ -220,12 +228,14 @@ if ( ! class_exists('Shortcodely_Saw_Plugin_Admin')) {
         /**
          * Info box with link to the support forums.
          */
-        public function plugin_support() {
+        public function plugin_support() 
+        {
                 $content = '<p>' . __('If you have any problems with this plugin or good ideas for improvements or new features, please talk about them in the', 'shortcodely-shortcode-any-widget') . ' <a href="http://wordpress.org/tags/' . $this->hook . '">' . __('Support forums', 'shortcodely-shortcode-any-widget') . '</a>.</p>';
                 $this->postbox($this->hook . 'support', 'Need support?', $content);
         }
 
-        public function text_limit($text, $limit, $finish = ' [&hellip;]') {
+        public function text_limit($text, $limit, $finish = ' [&hellip;]') 
+        {
             if (strlen($text) > $limit) {
                 $text = substr($text, 0, $limit);
                 $text = substr($text, 0, - (strlen(strrchr($text, ' '))));
