@@ -2,9 +2,9 @@
 /**
  * Unit Tests: Basic_Object cloass
  *
- * @package WordPress
+ * @package    WordPress
  * @subpackage UnitTests
- * @since 4.7.0
+ * @since      4.7.0
  */
 
 /**
@@ -12,30 +12,37 @@
  *
  * @since 4.0.0
  */
-class Basic_Object {
-	private $foo = 'bar';
+class Basic_Object
+{
+    private $foo = 'bar';
 
-	public function __get( $name ) {
-		return $this->$name;
-	}
+    public function __get( $name ) 
+    {
+        return $this->$name;
+    }
 
-	public function __set( $name, $value ) {
-		return $this->$name = $value;
-	}
+    public function __set( $name, $value ) 
+    {
+        return $this->$name = $value;
+    }
 
-	public function __isset( $name ) {
-		return isset( $this->$name );
-	}
+    public function __isset( $name ) 
+    {
+        return isset($this->$name);
+    }
 
-	public function __unset( $name ) {
-		unset( $this->$name );
-	}
+    public function __unset( $name ) 
+    {
+        unset($this->$name);
+    }
 
-	public function __call( $name, $arguments ) {
-		return call_user_func_array( array( $this, $name ), $arguments );
-	}
+    public function __call( $name, $arguments ) 
+    {
+        return call_user_func_array(array( $this, $name ), $arguments);
+    }
 
-	private function callMe() {
-		return 'maybe';
-	}
+    private function callMe() 
+    {
+        return 'maybe';
+    }
 }

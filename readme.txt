@@ -4,6 +4,7 @@ Tags: shortcode, widget, page, templates, page template, widget_area, sidebar
 Tested up to: 4.7
 Version: 1.0.0
 Stable tag: 1.0.0
+Licence: GPL-3.0+
 
 == Description ==
 Insert separate widgets or a entire widget area (sidebar) into a page using a shortcode.
@@ -116,3 +117,6 @@ Via the plugin you can do the following to affect styling:
 
 
 == Screenshots ==
+
+
+== Frequently Asked Questions ==

@@ -2,9 +2,9 @@
 /**
  * Unit Tests: Basic_Subclass class
  *
- * @package WordPress
+ * @package    WordPress
  * @subpackage UnitTests
- * @since 4.7.0
+ * @since      4.7.0
  */
 
 /**
@@ -12,4 +12,6 @@
  *
  * @since 4.0.0
  */
-class Basic_Subclass extends Basic_Object {}
+class Basic_Subclass extends Basic_Object
+{
+}
