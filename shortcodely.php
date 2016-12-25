@@ -66,8 +66,11 @@ function shortcodely_remove_widget_class( $params ) {
 
 	return $params;
 }
-/*-----------------------------------*/
+
 function shortcodely_do_widget_area( $atts ) {
+	/*
+	* used when a complete widget area is used via shortcode
+	*/
 	global $wp_registered_widgets, $_wp_sidebars_widgets, $wp_registered_sidebars;
 
 	extract(
@@ -123,6 +126,9 @@ function shortcodely_do_widget_area( $atts ) {
 }
 /*-----------------------------------*/
 function shortcodely_do_widget( $atts ) {
+	/*
+	* Used when a single widget is called using shortcode
+	*/
 	global $wp_registered_widgets, $_wp_sidebars_widgets, $wp_registered_sidebars;
 
 	/* check if the widget is in	the shortcode x sidebar	if not , just use generic,
